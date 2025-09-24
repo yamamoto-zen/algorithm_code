@@ -14,3 +14,7 @@ class MyAI(Alg3D):
                                 break
                 # ランダムに選択
                 return random.choice(legal_moves)
+    def debug_board(board):
+        print("dims:", len(board), len(board[0]), len(board[0][0]))
+        for i in range(len(board)):
+            print(f"layer {i}:", board[i])
