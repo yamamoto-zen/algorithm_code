@@ -5,16 +5,19 @@ class MyAI(Alg3D):
     def get_move(self, board: Board) -> Tuple[int, int]:
         #ここから自由にアルゴリズムを記入
         legal_moves = []
-                for x in range(4):
-                    for y in range(4):
-                        # zが埋まっていなければ合法手
-                        for z in range(4):
-                            if board[z][y][x] == 0:
-                                legal_moves.append((x, y))
-                                break
-                # ランダムに選択
-                return random.choice(legal_moves)
-    def debug_board(board):
-        print("dims:", len(board), len(board[0]), len(board[0][0]))
-        for i in range(len(board)):
-            print(f"layer {i}:", board[i])
+        size = len(board)  # たぶん 4
+
+        # (x, y) を走査して、まだ高さ z に空きがあれば合法手に追加
+        for x in range(size):
+            for y in range(size):
+                for z in range(size):
+                    if board[x][y][z] == 0:  # 空きマス
+                        legal_moves.append((x, y))
+                        break  # 一番下(zが小さい方)に置けるので次のyへ
+
+        # 万が一置ける場所がない場合は左上に置く（安全策）
+        if not legal_moves:
+            return (0, 0)
+
+        # ランダムに返す
+        return random.choice(legal_moves)
