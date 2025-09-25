@@ -11,7 +11,7 @@ class MyAI(Alg3D):
         for x in range(size):
             for y in range(size):
                 for z in range(size):
-                    if board[x][y][z] == 0:  # 空きマス
+                    if board[z][y][x] == 0:  # 空きマス
                         legal_moves.append((x, y))
                         break  # 一番下(zが小さい方)に置けるので次のyへ
 
